@@ -6,15 +6,17 @@ echo 'Finished cloning'
 cd student-submission 
 cp ../TestListExamples.java ./ 
 cp -r ../lib ./
-JAVAPATH=$(find . | grep "/ListExamples.java")
-echo $JAVAPATH
-if [[ -f "ListExamples.java" ]]
+#JAVAPATH=$(find . | grep "/ListExamples.java")
+#echo $JAVAPATH
+JAVAPATH="ListExamples.java"
+if [[ -f "$JAVAPATH" ]]
 then
     echo "Found ListExamples.java"
 else
     echo "Could not find ListExamples.java"
     exit 1
 fi
+cp $JAVAPATH ./
 CRESULT="$(javac -cp $CPATH *.java 2>&1)"
 if [[  $? != 0  ]]
 then
@@ -35,3 +37,4 @@ fi
 FAILURES=$(grep -oP "Failures:\s+\K\w+" <<< $TESTRESULTS)
 TESTS=$(grep -oP "Tests run:\s+\K\w+" <<< $TESTRESULTS)
 echo "Score: " $FAILURES/$TESTS
+echo $TESTRESULTS
