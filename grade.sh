@@ -36,5 +36,6 @@ fi
 #echo $TESTRESULTS
 FAILURES=$(grep -oP "Failures:\s+\K\w+" <<< $TESTRESULTS)
 TESTS=$(grep -oP "Tests run:\s+\K\w+" <<< $TESTRESULTS)
-echo "Score: " $FAILURES/$TESTS
+PASSED=$((TESTS-FAILURES))
+echo "Score: " $PASSED/$TESTS
 echo $TESTRESULTS
